@@ -1,5 +1,6 @@
 import spacy
 from typing import List
+from spacy.cli import download
 
 
 def f_func(data: str) -> bool:

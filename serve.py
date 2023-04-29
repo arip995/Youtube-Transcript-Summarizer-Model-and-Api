@@ -2,22 +2,27 @@ from flask import Flask, request
 from transcript_api import APIv1
 from segmenter import split_sentences
 from extractive_summariser import text_summarizer
+from typing import Dict
 
 app = Flask(__name__)
 
 
 @app.route("/")
-@app.route("/extractive", methods=['GET'])
+@app.route("/extractive", methods=['POST'])
 def extractive_summary():
     try:
-        link: str = request.args.get('link')
-        try:
-            summ = APIv1(youtube_link=link).get_video_id().get_transcript()
-            return {'summary': summ}, 200
-        except IndexError:
-            return {'message': 'Invalid Youtube Link'}, 500
-    except RuntimeError:
-        return {'message': 'Invalid Named Parameters'}, 500
+        gay: Dict[str | float] = request.get_json()
+
+        plain_text = APIv1(youtube_link=gay.get('link')).get_video_id().get_transcript()
+        return {'summary': text_summarizer(text=split_sentences(plain_text), percentage=gay.get('percentage'))}, 200
+    
+    except (IndexError, ValueError, TypeError):
+        return {'message': 'Invalid Parameters'}, 500
+
+
+@app.route("/abstractive", methods=['POST'])
+def abstractive_summary():
+    return {'message': 'Not Implemented'}
 
 
 if __name__ == '__main__':

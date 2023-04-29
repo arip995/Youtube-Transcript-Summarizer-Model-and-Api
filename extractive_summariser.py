@@ -1,11 +1,11 @@
 import spacy
 from spacy.lang.en.stop_words import STOP_WORDS
+from spacy.cli import download
 from string import punctuation
 from heapq import nlargest
 
 
 def text_summarizer(text: str, percentage: float) -> str:
-    
     nlp = spacy.load('en_core_web_sm')
     doc = nlp(text)
     tokens = [token.text for token in doc if token.text not in punctuation and token.text not in STOP_WORDS]
