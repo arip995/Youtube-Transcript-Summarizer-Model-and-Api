@@ -12,7 +12,7 @@ class APIv1:
     
     def get_video_id(self) -> Any:
         self.vid_id = re.findall('v=[a-zA-Z0-9-_]*', self.link)[0][2:]
-        self.vid = yt.get_transcript(self.vid_id, languages=['en-US', 'en-GB', 'en'])
+        self.vid = yt.get_transcript(self.vid_id, languages=['en-US', 'en-GB','en-IN', 'en'])
         return self
     
     @staticmethod

@@ -2,7 +2,7 @@ from flask import Flask, request
 from transcript_api import APIv1
 from segmenter import split_sentences
 from extractive_summariser import text_summarizer
-from typing import Dict
+from typing import Dict, Any
 
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route("/extractive", methods=['POST'])
 def extractive_summary():
     try:
-        gay: Dict[str | float] = request.get_json()
+        gay: Dict[Any] = request.get_json()
 
         plain_text = APIv1(youtube_link=gay.get('link')).get_video_id().get_transcript()
         return {'summary': text_summarizer(text=split_sentences(plain_text), percentage=gay.get('percentage'))}, 200
