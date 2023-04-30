@@ -39,10 +39,13 @@ def split_sentences(text: str) -> str:
             buff.clear()
         
         elif doc[i + 1].pos_ == 'ADJ':
-            if doc[i].pos_ in ['SCONJ', 'CCONJ', 'VERB', 'ADP']:
+            if doc[i].pos_ in ['SCONJ', 'CCONJ', 'VERB']:
                 continue
             res.append(' '.join(buff)[0].upper() + ' '.join(buff)[1:])
             buff.clear()
+        
+        elif doc[i + 1].pos_ in ['PART', 'NUM']:
+            continue
 
     buff.append(str(doc[-1]))
     res.append(' '.join(buff)[0].upper() + ' '.join(buff)[1:])
