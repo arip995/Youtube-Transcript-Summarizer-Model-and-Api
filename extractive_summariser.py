@@ -24,7 +24,7 @@ def text_summarizer(text: str, percentage: float) -> str:
         freq_of_word[word] = freq_of_word[word] / max_freq
         
     sent_tokens = [sent for sent in doc.sents]
-    sent_order = {str(sent): i for sent, i in zip(sent_tokens, range(len(sent_tokens)))}
+    sent_order = {str(sent): i for sent, i in zip(sent_tokens, range(len(sent_tokens)))}    # noqa: E501
     sent_scores = dict()
     for sent in sent_tokens:
         for word in sent:

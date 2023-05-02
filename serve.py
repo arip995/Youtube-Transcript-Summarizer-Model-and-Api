@@ -13,8 +13,8 @@ app = Flask(__name__)
 def extractive_summary():
     try:
         gay: Dict[Any] = request.get_json()
-        plain_text = APIv1(youtube_link=gay.get('link')).get_video_id().get_transcript()
-        return {'summary': text_summarizer(text=split_sentences(plain_text), percentage=gay.get('percentage'))}, 200
+        plain_text = APIv1(youtube_link=gay.get('link')).get_video_id().get_transcript()    # noqa: E501
+        return {'summary': text_summarizer(text=split_sentences(plain_text), percentage=gay.get('percentage'))}, 200    # noqa: E501
     
     except (IndexError, ValueError, TypeError, ):
         return {'message': 'Invalid Parameters'}, 400

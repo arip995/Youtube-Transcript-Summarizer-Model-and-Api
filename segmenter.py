@@ -18,7 +18,7 @@ def split_sentences(text: str) -> str:
             return text
         
     for i in range(1, len(doc) - 1):
-        buff.append(doc[i].text.title() if doc[i].pos_ in ['PROPN'] else doc[i].text)
+        buff.append(doc[i].text.title() if doc[i].pos_ in ['PROPN'] else doc[i].text)   # noqa: E501
         # print(buff)
         if doc[i + 1].pos_ == 'PRON':
             if doc[i].pos_ in ['SCONJ', 'AUX', 'ADP']:

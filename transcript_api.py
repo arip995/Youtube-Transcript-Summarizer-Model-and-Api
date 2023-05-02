@@ -1,6 +1,6 @@
 from youtube_transcript_api import YouTubeTranscriptApi as yt
 import re
-from typing import Tuple, Any
+from typing import Self
 
 
 class APIv1:
@@ -10,7 +10,7 @@ class APIv1:
         self.vid: str = ""
         self.vid_id: str = ""
     
-    def get_video_id(self) -> Any:
+    def get_video_id(self) -> Self:
         self.vid_id = re.findall('v=[a-zA-Z0-9-_]*', self.link)[0][2:]
         self.vid = yt.get_transcript(self.vid_id, languages=['en-US', 'en-GB', 'en-IN', 'en'])
         return self
