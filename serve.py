@@ -7,11 +7,11 @@ from extractive_summariser import text_summarizer
 from typing import Dict, Any
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True)
+CORS(app)
 
 
 @app.route("/extractive", methods=['GET', 'POST'])
-@cross_origin(supports_credentials=True)
+@cross_origin()
 def extractive_summary():
     try:
         gay: Dict[Any] = request.get_json()
@@ -26,7 +26,7 @@ def extractive_summary():
 
 
 @app.route("/abstractive", methods=['GET', 'POST'])
-@cross_origin(supports_credentials=True)
+@cross_origin()
 def abstractive_summary():
     return {'message': 'Not Implemented'}
 
