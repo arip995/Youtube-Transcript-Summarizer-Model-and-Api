@@ -16,7 +16,7 @@ def extractive_summary():
     try:
         res: Dict[Any] = request.get_json()
         plain_text = APIv1(youtube_link=res.get('link')).get_video_id().get_transcript()    # noqa: E501
-        return {'summary': text_summarizer(text=split_sentences(plain_text), percentage=res.get('percentage'))}, 200    # OK
+        return {'summary': text_summarizer(text=plain_text, percentage=res.get('percentage'))}, 200    # OK
     
     except (IndexError, ValueError, TypeError, ):
         return {'message': 'Invalid Parameters'}, 400   # bad request
